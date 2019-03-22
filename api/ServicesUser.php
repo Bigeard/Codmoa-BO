@@ -3,6 +3,38 @@ require_once 'ConnectionMethods.php';
 
 class ServicesUser extends ConnectionMethods {
 
+    public function getUserByList()
+    {
+        $this->startConnection();
+
+        $sql = "SELECT * FROM table_users ORDER BY user_id DESC";
+        $req = $this->connection->prepare($sql);
+        $req->execute();
+
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        $this->endConnection();
+
+        $result = count($result) > 0 ? $result : null; 
+
+        return $result;
+    }
+
+    public function getUserById($id)
+    {
+        $this->startConnection();
+        $sql = 'SELECT * FROM table_users WHERE user_id = :id ';
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $this->endConnection();
+
+        $result = count($result) > 0 ? $result : null; 
+
+        return $result;
+    }
+
     public function addUser($user_firstname, $user_lastname, $user_email, $user_password)
     {
 
@@ -41,26 +73,5 @@ class ServicesUser extends ConnectionMethods {
         $this->endConnection();
         return $result;
     }
-}
 
-//------------------------ Verify Post --------------------------------
-
-if(isset($_POST['signup']) &&
-    isset($_POST['user_firstname']) &&
-    isset($_POST['user_lastname']) &&
-    isset($_POST['user_email']) &&
-    isset($_POST['user_password']) &&
-    $_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        $service = new ServicesUser;
-        $result = $service->addUser($_POST['user_firstname'], $_POST['user_lastname'], $_POST['user_email'], $_POST['user_password']);
-
-        if($result) {
-            header('Location: ../index.php?info=3');
-        } else {
-            header('Location: ../signup.php?info=1');
-        }
-
-} else {
-    header('Location: ../signup.php?info=2');
 }

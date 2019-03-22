@@ -13,7 +13,7 @@ if(isset($_GET['info'])){$info = $_GET['info'];} else {$info = 0;}
     <div class="content con">
         <h1>Codmoa</h1>
         <h2>Sign up</h2>
-        <form action="api/ServicesUser.php" method="post">
+        <form action="api/addUser.php" method="post">
 
           <label for="user_firstname">Firstname</label>
           <input id="user_firstname" name="user_firstname" type="text" placeholder="Enter your firstname">

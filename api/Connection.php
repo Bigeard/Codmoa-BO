@@ -3,9 +3,9 @@
 
         private static $instance = null;
 
-        const USER = "XXXuserXXX";
-        const PASSWORD = "XXXpasswordXXX";
-        const DNS = 'pgsql:host=127.0.0.1;port=5432;dbname=XXXdatabaseXXX';
+        const USER = "postgres";
+        const PASSWORD = "postgres";
+        const DNS = 'pgsql:host=127.0.0.1;port=5432;dbname=postgres';
 
         public static function startConnection(){
             try{
