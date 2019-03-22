@@ -3,21 +3,21 @@
 
         private static $instance = null;
 
-        const USER = "XXXuserXXX";
-        const PASSWORD = "XXXpasswordXXX";
-        const DNS = 'pgsql:host=127.0.0.1;port=5432;dbname=XXXdatabaseXXX';
+        const HOST = '127.0.0.1';
+        const PORT = '5432';
+        const DBNAME = 'codmoa';
 
-        public static function startConnection(){
+        const DNS = 'pgsql:host=' . self::HOST . ';port=' . self::PORT . ';dbname=' . self::DBNAME;
+
+        public static function startConnection($user, $password){
             try{
-                self::$instance = new PDO(self::DNS, self::USER, self::PASSWORD,  array( PDO::ATTR_TIMEOUT => 100, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION ));
+                self::$instance = new PDO(self::DNS, $user, $password, array( PDO::ATTR_TIMEOUT => 100, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION ));
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                self::$instance->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
                 return self::$instance;
             
             }catch (PDOException $e){
                 die($e->getMessage());
                 echo $e;
-                header('Location:../index.php');
                 return null;
             }
         }

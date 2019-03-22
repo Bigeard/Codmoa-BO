@@ -10,11 +10,11 @@ CREATE TABLE table_users (
 
 INSERT INTO table_users
 (user_firstname, user_lastname, user_email, user_password)
-VALUES ('Robin', 'Bigeard', 'robin.bigeard@gmail.com', md5('nuggets');
+VALUES ('Robin', 'Bigeard', 'robin.bigeard@gmail.com', md5('nuggets'));
 
 INSERT INTO table_users
 (user_firstname, user_lastname, user_email, user_password)
-VALUES ('admin', 'admin', 'admin@admin.com', md5('nuggets');
+VALUES ('admin', 'admin', 'admin@admin.com', md5('nuggets'));
 
 SELECT * FROM table_users;
 

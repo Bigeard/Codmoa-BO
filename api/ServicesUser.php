@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'ConnectionMethods.php';
 
 class ServicesUser extends ConnectionMethods {
@@ -6,12 +7,12 @@ class ServicesUser extends ConnectionMethods {
     public function addUser($user_firstname, $user_lastname, $user_email, $user_password)
     {
 
-        $this->startConnection();
+        $this->startConnection('postgres', 'P@ssw0rd');
 
         //------------------------ Detect user exist --------------------------------
 
         $sql="SELECT user_firstname, user_lastname, user_email
-        FROM table_users 
+        FROM schema.table_users 
         WHERE user_firstname = :user_firstname
         AND user_lastname = :user_lastname
         OR user_email = :user_email";

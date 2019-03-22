@@ -5,7 +5,7 @@ class ServicesInfo extends ConnectionMethods {
 
     public function getInfoByList()
     {
-        $this->startConnection();
+        $this->startConnection($_SESSION["username"], $_SESSION["password"]);
 
         $sql = "SELECT * FROM table_info ORDER BY info_id DESC";
         $req = $this->connection->prepare($sql);
@@ -21,7 +21,7 @@ class ServicesInfo extends ConnectionMethods {
 
     public function getInfoById($id)
     {
-        $this->startConnection();
+        $this->startConnection($_SESSION["username"], $_SESSION["password"]);
         $sql = 'SELECT * FROM table_info WHERE info_id = :id ';
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -38,7 +38,7 @@ class ServicesInfo extends ConnectionMethods {
 
     public function addInfo($info_autor, $info_title, $info_subtitle, $info_text)
     {
-        $this->startConnection();
+        $this->startConnection($_SESSION["username"], $_SESSION["password"]);
 
         //------------------------ Detect info exist --------------------------------
 
@@ -77,7 +77,7 @@ class ServicesInfo extends ConnectionMethods {
 
     public function editInfo($info_autor, $info_title, $info_subtitle, $info_text, $info_id)
     {
-        $this->startConnection();
+        $this->startConnection($_SESSION["username"], $_SESSION["password"]);
 
         //------------------------ Detect info exist --------------------------------
 
@@ -116,7 +116,7 @@ class ServicesInfo extends ConnectionMethods {
     }
 
     public function deleteInfo($info_id){
-        $this->startConnection();
+        $this->startConnection($_SESSION["username"], $_SESSION["password"]);
         $sql = 'DELETE FROM table_info WHERE info_id  = ?';
         $req = $this->connection->prepare($sql);
         $req->execute([$info_id]);
