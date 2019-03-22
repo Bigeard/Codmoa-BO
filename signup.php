@@ -11,7 +11,7 @@ if(isset($_GET['info'])){$info = $_GET['info'];} else {$info = 0;}
   </head>
   <body>
     <div class="content con">
-        <h1>Bigeard</h1>
+        <h1>Codmoa</h1>
         <h2>Sign up</h2>
         <form action="api/ServicesUser.php" method="post">
 

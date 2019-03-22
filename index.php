@@ -12,7 +12,7 @@ if(isset($_GET['info'])){$info = $_GET['info'];} else {$info = 0;}
   <body>
 
       <div class="content con">
-        <h1>Bigeard</h1>
+        <h1>Codmoa</h1>
         <h2>Log in</h2>
 
         <form action="api/ServicesConnection.php" method="post">
