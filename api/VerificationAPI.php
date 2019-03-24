@@ -15,7 +15,8 @@
                 $_SESSION["password"] = $_POST["user_password"];
                 header('Location: ../home.php');
             } else {
-                header('Location: ../index.php?info=1');
+                echo('coucou MAUVAIS');
+                // header('Location: ../index.php?info=1');
             } 
         }
     }

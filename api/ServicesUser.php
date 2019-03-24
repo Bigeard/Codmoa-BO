@@ -36,22 +36,20 @@ class ServicesUser extends ConnectionMethods {
         return $result;
     }
 
-    public function addUser($user_firstname, $user_lastname, $user_email, $user_password)
+    public function addUser($user, $password, $privileges, $tables)
     {
 
         $this->startConnection('postgres', 'P@ssw0rd');
 
         //------------------------ Detect user exist --------------------------------
 
-        $sql="SELECT user_firstname, user_lastname, user_email
-        FROM schema.table_users 
-        WHERE user_firstname = :user_firstname
-        AND user_lastname = :user_lastname
-        OR user_email = :user_email";
+        $sql="CREATE USER :user WITH ENCRYPTED PASSWORD ':password';
+              GRANT :privileges ON :tables to :user;";
         $req = $this->connection->prepare($sql);
-        $req->bindParam(':user_firstname', $user_firstname);
-        $req->bindParam(':user_lastname', $user_lastname);
-        $req->bindParam(':user_email', $user_email);
+        $req->bindParam(':user', $user);
+        $req->bindParam(':password', $password);
+        $req->bindParam(':privileges', $privileges);
+        $req->bindParam(':tables', $tables);
         $req->execute();
         $exist = $req->fetch();
         

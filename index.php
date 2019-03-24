@@ -15,7 +15,7 @@ if(isset($_GET['info'])){$info = $_GET['info'];} else {$info = 0;}
         <h1>Codmoa</h1>
         <h2>Log in</h2>
 
-        <form action="api/ServicesConnection.php" method="post">
+        <form action="api/checkLogin.php" method="post">
           <label for="user_name">Identifiant</label>
           <input id="user_name" name="user_name" type="text" placeholder="Enter your name">
           <label for="user_password">Password</label>
