@@ -1,0 +1,1 @@
+<a href="http://localhost/pdo_connections/library/disconnect.php"><button class="disconnect" style="position:fixed;">Disconnect</button></a>

@@ -1,36 +1,34 @@
-<?php
-if(isset($_COOKIE['user_email']) && isset($_COOKIE['user_password']) || isset($_SESSION['user_email']) && isset($_SESSION['user_password'])) {header('Location: connect');}
-if(isset($_GET['info'])){$info = $_GET['info'];} else {$info = 0;}
-?>
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Log in</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />    
-  </head>
-  <body>
+<html>
 
-      <div class="content con">
-        <h1>Codmoa</h1>
-        <h2>Log in</h2>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Log In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/main.css" />
+    <!--<script src="main.js"></script>-->
+</head>
 
-        <form action="api/checkLogin.php" method="post">
-          <label for="user_name">Identifiant</label>
-          <input id="user_name" name="user_name" type="text" placeholder="Enter your name">
-          <label for="user_password">Password</label>
-          <input id="user_password" name="user_password" type="password" placeholder="Enter your password">
-          <button name="login" type="submit">Log in</button>
-        </form>
+<body>
+    <h1>Log In to Database</h1>
+    <form action="library/checkLogin.php" method="POST">
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Send">
+    </form>
+    
+    <?php if(isset($_GET['error'])) { ?>
+        <?php if($_GET['error'] == 1) : ?>
+            <p>Login or Password incorrect</p>
+        <?php elseif($_GET['error'] == 2) : ?>
+            <p>Session expired, please reconnect</p>
+        <?php else : ?>
+            
+        <?php endif; ?>
+    <?php } ?>
+    
+    
+</body>
 
-        <a href="signup.php">Sign up</a>
-
-        <?php 
-          if($info == 1){echo "<p class=\"info\">Error: Can not connect</p>";}
-          if($info == 2){echo "<p class=\"info\">Deconexion success.</p>";}
-          if($info == 3){echo "<p class=\"info\">Sign up success.</p>";}
-        ?>
-
-        </div>
-  </body>
 </html>
