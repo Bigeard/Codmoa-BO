@@ -89,6 +89,13 @@ body {
         font-size: 1.3rem;
         text-shadow: 1px 1px black;
     }
+
+    .buttons-wrapper {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
     button {
         border-radius: 50px;
         border: none;

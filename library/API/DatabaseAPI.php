@@ -158,7 +158,29 @@
             }         
             $this->disconnectDB();
 
-            $tab = count($tab) > 0 ? $tab : null; 
+            return $tab;
+        }
+
+        public function isAdmin($user) {
+            $this->connectDB('postgres', 'P@ssw0rd');
+
+            $sql="SELECT DISTINCT
+                        privilege_type
+                    FROM   
+                        information_schema.role_table_grants
+                    WHERE  
+                        grantee = :user";
+
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':user', $user);
+            $stmt->execute();
+
+            $tab=[];
+            while($result = $stmt->fetch(PDO::FETCH_OBJ)){
+                $tab[] = $result;
+            }         
+            $this->disconnectDB();
+
             return $tab;
         }
     }
