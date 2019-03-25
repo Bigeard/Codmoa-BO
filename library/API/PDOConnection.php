@@ -3,8 +3,8 @@
 
         private static $instance = null;
 
-        const HOST = '<host>';
-        const DBNAME = '<dbname>';
+        const HOST = '127.0.0.1';
+        const DBNAME = 'codmoa';
 
         const DNS = 'pgsql:host=' . self::HOST . ';dbname=' . self::DBNAME;
 
