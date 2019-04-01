@@ -3,49 +3,21 @@
 
     class DatabaseAPI extends ConnectionAPI{
 
-        //Usage of pg_ functions
-        public function insertMember($m_id, $m_sname, $m_fname, $m_address, $m_zipcode, $m_phone, $m_recommendedby) {
-            
-            $username = $_SESSION["username"];
-            $password = $_SESSION["password"];
-            $host = "localhost";
-            $port = 5432;
-            $dbname = "cours";
-            
-            //Initialize connection
-            $connect = pg_connect("host=$host port=$port dbname=$dbname user=$username password=$password");        
-
-            // prepare sql and bind parameters
-            $stmt = pg_prepare($connect, "query", "INSERT INTO exo.members (memid, surname, firstname, address, zipcode, telephone, recommendedby, joindate) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)");
-
-            //Format date
-            $m_joindate = date('Y-m-d H:i:s');
-
-            //Execute sql query
-            $stmt = pg_execute($connect, "query", array($m_id, $m_sname, $m_fname, $m_address, $m_zipcode, $m_phone, $m_recommendedby, $m_joindate));
-
-            //Close connection
-            pg_close($connect);
-        }
-
         //Usage of PDO
-        public function insertFacility($f_facid, $f_name, $f_membercost, $f_guestcost, $f_initialoutlay, $f_monthlymaintenance){
+        public function createUser($username, $password, $isAdmin){
             
             $this->connectDB($_SESSION["username"], $_SESSION["password"]);  
                   
 
-            // prepare sql and bind parameters
-            $stmt = $this->connection->prepare("INSERT INTO exo.facilities (facid, name, membercost, guestcost, initialoutlay, monthlymaintenance) 
-            VALUES (:f_facid, :f_name, :f_membercost, :f_guestcost, :f_initialoutlay, :f_monthlymaintenance)");
-            $stmt->bindParam(':f_facid', $f_facid);
-            $stmt->bindParam(':f_name', $f_name);
-            $stmt->bindParam(':f_membercost', $f_membercost);
-            $stmt->bindParam(':f_guestcost', $f_guestcost);
-            $stmt->bindParam(':f_initialoutlay', $f_initialoutlay);
-            $stmt->bindParam(':f_monthlymaintenance', $f_monthlymaintenance);
+            $sql1 = "CREATE USER $username WITH PASSWORD '$password';";
+            $stmt1 = $this->connection->prepare($sql1);
+            $stmt1->execute();
 
-            $stmt->execute();
+            if ($isAdmin) {
+                $sql2 = "GRANT ALL PRIVILEGES ON DATABASE codmoa to $username;";
+                $stmt2 = $this->connection->prepare($sql2);
+                $stmt2->execute();
+            }
 
             $this->disconnectDB();
         }

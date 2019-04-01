@@ -20,16 +20,16 @@ if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
     <a href="./requests.php"><button class="return" style="position:fixed;">Return</button></a>
     <h1>Create User</h1>
 
-    <form action="../../library/insertProcessing.php" method="POST">
+    <form action="../library/insertProcessing.php" method="POST">
         <div class="form-wrapper">
             <label for="user_name">Name: </label>
             <input type="text" name="user_name" id="user_name" required>
 
             <label for="user_password">Password: </label>
-            <input type="text" name="user_password" id="user_password" required>
+            <input type="password" name="user_password" id="user_password" required>
 
             <label for="user_isAdmin">Super Admin: </label>
-            <input type="checkbox" name="user_isAdmin" id="user_isAdmin" required>
+            <input type="checkbox" name="user_isAdmin" id="user_isAdmin">
         </div>
         <input type="submit" value="Send">
     </form>
