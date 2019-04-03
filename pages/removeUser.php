@@ -3,6 +3,9 @@ session_start();
 if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
     header('Location: ../../index.php?error=2');
 }
+require "../library/API/DatabaseAPI.php";
+$api = new DatabaseAPI();
+$users = $api->selectAllUsers();
 ?> 
 <!DOCTYPE html>
 <html>
@@ -10,7 +13,7 @@ if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Create User</title>
+    <title>Remove User</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../styles/main.css" />
     <!--<script src="main.js"></script>-->
@@ -18,20 +21,15 @@ if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
 
 <body>
     <a href="./requests.php"><button class="return" style="position:fixed;">Return</button></a>
-    <h1>Create User</h1>
+    <h1>Remove User</h1>
 
     <form action="../library/processing.php" method="POST">
-        <div class="form-wrapper">
-            <label for="user_name">Name: </label>
-            <input type="text" name="add_username" id="user_name" required>
-
-            <label for="user_password">Password: </label>
-            <input type="password" name="add_password" id="user_password" required>
-
-            <label for="user_isAdmin">Super Admin: </label>
-            <input type="checkbox" name="add_isAdmin" id="user_isAdmin">
-        </div>
-        <input type="submit" value="Send">
+        <select name="remove_user">
+            <?php foreach ($users as $user) { ?>
+                <option value="<?= $user->usename ?>"><?= $user->usename ?></option>
+            <?php } ?>
+        </select>
+        <input type="submit" value="Remove">
     </form>
 </body>
 

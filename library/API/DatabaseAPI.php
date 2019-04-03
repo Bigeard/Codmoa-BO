@@ -99,4 +99,50 @@ class DatabaseAPI extends ConnectionAPI
             return false;
         }
     }
+
+    public function selectAllUsers()
+    {
+        $this->connectDB('postgres', 'P@ssw0rd');
+
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    pg_user;";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        $tab = [];
+        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $tab[] = $result;
+        }
+        $this->disconnectDB();
+
+        return $tab;
+    }
+
+    public function removeUser($user)
+    {
+        try {
+            $this->connectDB('postgres', 'P@ssw0rd');
+
+            $sql1 = "REASSIGN OWNED BY $user TO trashbin;";
+            $stmt1 = $this->connection->prepare($sql1);
+            $stmt1->execute();
+
+            $sql2 = "DROP OWNED BY $user;";
+            $stmt2 = $this->connection->prepare($sql2);
+            $stmt2->execute();
+
+            $sql3 = "DROP USER $user;";
+            $stmt3 = $this->connection->prepare($sql3);
+            $stmt3->execute();
+
+            $this->disconnectDB();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }

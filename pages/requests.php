@@ -31,11 +31,12 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
             <!--Check User permissions -->
             <?php foreach ($admin_permissions as $permission) { ?>
                 <?php if (strpos($permission->case, 'superuser') !== false) : ?>
-                    <a href="#"><button>Manage Users</button></a>
+                    <a href="./manageUsers.php"><button>Manage Users</button></a>
                 <?php endif; ?>
                 <?php if (strpos($permission->case, 'CREATE DATABASE') !== false) : ?>
-                    <a href="#"><button>Create Schema</button></a>
+                    <a href="#"><button>Modify Database</button></a>
                 <?php endif; ?>
+                    <a href="#"><button>Navigate Database</button></a>
             <?php } ?>
         <?php endif; ?>
     </div>
