@@ -32,9 +32,9 @@ $admin_permissions = $api->isAdmin($_SESSION["username"]);
             <!--Check User permissions -->
             <?php foreach ($permissions_list as $permission) { ?>
                 <?php if ($permission->privilege_type == "SELECT"): ?>
-                    <a href="selectAll.php"><button>Select All</button></a>
+                    <a href="#"><button>Select All</button></a>
                 <?php elseif ($permission->privilege_type == "INSERT"): ?>
-                    <a href="insert.php"><button>Insert</button></a>
+                    <a href="#"><button>Insert</button></a>
                 <?php endif; ?>
             <?php } ?>
 
@@ -43,7 +43,7 @@ $admin_permissions = $api->isAdmin($_SESSION["username"]);
                 <?php if ($permission->privilege_type == "INSERT"): ?>
                     <a href="createUser.php"><button>Create User</button></a>
                 <?php elseif ($permission->privilege_type == "UPDATE"): ?>
-                    <a href="insert.php"><button>Manage Permissions</button></a>
+                    <a href="#"><button>Manage Permissions</button></a>
                 <?php endif; ?>
             <?php } ?>
             <?php endif; ?>
