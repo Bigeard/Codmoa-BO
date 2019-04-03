@@ -23,6 +23,8 @@
             <p>Login or Password incorrect</p>
         <?php elseif($_GET['error'] == 2) : ?>
             <p>Session expired, please reconnect</p>
+        <?php elseif($_GET['error'] == 3) : ?>
+            <p>User not allowed to connect</p>
         <?php else : ?>
             
         <?php endif; ?>

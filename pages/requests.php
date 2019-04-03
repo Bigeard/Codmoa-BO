@@ -6,8 +6,7 @@ if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
 require "navbar.php";
 require "../library/API/DatabaseAPI.php";
 $api = new DatabaseAPI();
-$permissions_list = $api->checkRoles($_SESSION["username"]);
-$admin_permissions = $api->isAdmin($_SESSION["username"]);
+$permissions_list = $api->checkDatabaseRoles($_SESSION["username"]);
 
 ?> 
 <!DOCTYPE html>
@@ -26,27 +25,21 @@ $admin_permissions = $api->isAdmin($_SESSION["username"]);
     <h1>Connected</h1>
 
     <div class="buttons-wrapper">
-        <?php if (count($permissions_list) <= 0 && count($admin_permissions) <= 0) : ?>
+        <?php if (count($permissions_list) <= 0) : ?>
             <p>Cet Utilisateur n'a aucune Permission</p>
         <?php else : ?>
             <!--Check User permissions -->
             <?php foreach ($permissions_list as $permission) { ?>
-                <?php if ($permission->privilege_type == "SELECT"): ?>
-                    <a href="#"><button>Select All</button></a>
-                <?php elseif ($permission->privilege_type == "INSERT"): ?>
-                    <a href="#"><button>Insert</button></a>
+                <?php if (strpos($permission->case, 'superuser') !== false): ?>
+                    <a href="#"><button>MANAGE USERS</button></a>
                 <?php endif; ?>
+                <?php if (strpos($permission->case, 'CREATE DATABASE') !== false): ?>
+                    <a href="#"><button>CREATE SCHEMA</button></a>
+                <?php endif; ?>
+                
             <?php } ?>
 
-            <!--Check Admin permissions -->
-            <?php foreach ($admin_permissions as $permission) { ?>
-                <?php if ($permission->privilege_type == "INSERT"): ?>
-                    <a href="createUser.php"><button>Create User</button></a>
-                <?php elseif ($permission->privilege_type == "UPDATE"): ?>
-                    <a href="#"><button>Manage Permissions</button></a>
-                <?php endif; ?>
-            <?php } ?>
-            <?php endif; ?>
+        <?php endif; ?>
     </div>
 </body>
 
