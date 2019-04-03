@@ -100,32 +100,6 @@ CREATE TABLE exo.members (
 ALTER TABLE exo.members OWNER TO postgres;
 
 --
--- TOC entry 2117 (class 0 OID 16604)
--- Dependencies: 184
--- Data for Name: bookings; Type: TABLE DATA; Schema: exo; Owner: postgres
---
-
-COPY exo.bookings (bookid, facid, memid, starttime, slots) FROM stdin;
-1	1	1	2018-11-28 08:41:30.783157	3
-2	2	2	2018-11-28 09:01:22.950578	4
-3	3	3	2018-11-28 09:01:22.950578	5
-4	4	4	2018-11-28 09:01:22.950578	50
-5	5	5	2018-11-28 09:01:22.950578	20
-6	6	6	2018-11-28 09:01:22.950578	200
-7	7	7	2018-11-28 09:01:22.950578	10
-8	8	8	2018-11-28 09:01:22.950578	200
-9	9	9	2018-11-28 09:01:22.950578	2000
-10	10	10	2018-11-28 09:01:22.950578	3000
-11	11	11	2018-11-28 11:27:57.801246	50
-12	12	19	1970-01-01 00:00:00	3
-13	11	10	1970-01-01 00:00:00	5
-15	11	12	2018-12-01 00:00:00	50
-22	8	14	2019-03-22 00:00:00	4
-21	1	1	2019-02-27 00:00:00	22
-\.
-
-
---
 -- TOC entry 2116 (class 0 OID 16596)
 -- Dependencies: 183
 -- Data for Name: facilities; Type: TABLE DATA; Schema: exo; Owner: postgres
@@ -175,6 +149,31 @@ COPY exo.members (memid, surname, firstname, address, zipcode, telephone, recomm
 19	Alluin	Allan	Jura	43213	0645673456	3	2018-11-29 07:11:27
 \.
 
+
+--
+-- TOC entry 2117 (class 0 OID 16604)
+-- Dependencies: 184
+-- Data for Name: bookings; Type: TABLE DATA; Schema: exo; Owner: postgres
+--
+
+COPY exo.bookings (bookid, facid, memid, starttime, slots) FROM stdin;
+1	1	1	2018-11-28 08:41:30.783157	3
+2	2	2	2018-11-28 09:01:22.950578	4
+3	3	3	2018-11-28 09:01:22.950578	5
+4	4	4	2018-11-28 09:01:22.950578	50
+5	5	5	2018-11-28 09:01:22.950578	20
+6	6	6	2018-11-28 09:01:22.950578	200
+7	7	7	2018-11-28 09:01:22.950578	10
+8	8	8	2018-11-28 09:01:22.950578	200
+9	9	9	2018-11-28 09:01:22.950578	2000
+10	10	10	2018-11-28 09:01:22.950578	3000
+11	11	11	2018-11-28 11:27:57.801246	50
+12	12	19	1970-01-01 00:00:00	3
+13	11	10	1970-01-01 00:00:00	5
+15	11	12	2018-12-01 00:00:00	50
+22	8	14	2019-03-22 00:00:00	4
+21	1	1	2019-02-27 00:00:00	22
+\.
 
 --
 -- TOC entry 1997 (class 2606 OID 16608)
@@ -255,9 +254,8 @@ ALTER TABLE ONLY exo.members
 REVOKE ALL ON SCHEMA exo FROM PUBLIC;
 REVOKE ALL ON SCHEMA exo FROM postgres;
 GRANT ALL ON SCHEMA exo TO postgres;
-GRANT USAGE ON SCHEMA exo TO "UserRO";
-GRANT USAGE ON SCHEMA exo TO "userRO";
-GRANT USAGE ON SCHEMA exo TO "userIO";
+GRANT USAGE ON SCHEMA exo TO "userro";
+GRANT USAGE ON SCHEMA exo TO "userio";
 
 
 --
@@ -281,12 +279,10 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 REVOKE ALL ON TABLE exo.bookings FROM PUBLIC;
 REVOKE ALL ON TABLE exo.bookings FROM postgres;
 GRANT ALL ON TABLE exo.bookings TO postgres;
-GRANT SELECT ON TABLE exo.bookings TO "UserRO";
-GRANT SELECT ON TABLE exo.bookings TO testuser;
-GRANT SELECT ON TABLE exo.bookings TO "userRO";
-GRANT INSERT ON TABLE exo.bookings TO "userIO";
-GRANT ALL ON TABLE exo.bookings TO "UserALL" WITH GRANT OPTION;
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE exo.bookings TO "userALL";
+GRANT SELECT ON TABLE exo.bookings TO "userro";
+GRANT INSERT ON TABLE exo.bookings TO "userio";
+GRANT ALL ON TABLE exo.bookings TO "userall" WITH GRANT OPTION;
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE exo.bookings TO "userall";
 
 
 --
@@ -298,12 +294,10 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE exo.bookings TO "userALL";
 REVOKE ALL ON TABLE exo.facilities FROM PUBLIC;
 REVOKE ALL ON TABLE exo.facilities FROM postgres;
 GRANT ALL ON TABLE exo.facilities TO postgres;
-GRANT SELECT ON TABLE exo.facilities TO "UserRO";
-GRANT SELECT ON TABLE exo.facilities TO testuser;
-GRANT SELECT ON TABLE exo.facilities TO "userRO";
-GRANT INSERT ON TABLE exo.facilities TO "userIO";
-GRANT ALL ON TABLE exo.facilities TO "UserALL" WITH GRANT OPTION;
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE exo.facilities TO "userALL";
+GRANT SELECT ON TABLE exo.facilities TO "userro";
+GRANT INSERT ON TABLE exo.facilities TO "userio";
+GRANT ALL ON TABLE exo.facilities TO "userall" WITH GRANT OPTION;
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE exo.facilities TO "userall";
 
 
 --
@@ -315,12 +309,10 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE exo.facilities TO "userALL";
 REVOKE ALL ON TABLE exo.members FROM PUBLIC;
 REVOKE ALL ON TABLE exo.members FROM postgres;
 GRANT ALL ON TABLE exo.members TO postgres;
-GRANT SELECT ON TABLE exo.members TO "UserRO";
-GRANT SELECT ON TABLE exo.members TO testuser;
-GRANT SELECT ON TABLE exo.members TO "userRO";
-GRANT INSERT ON TABLE exo.members TO "userIO";
-GRANT ALL ON TABLE exo.members TO "UserALL" WITH GRANT OPTION;
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE exo.members TO "userALL";
+GRANT SELECT ON TABLE exo.members TO "userro";
+GRANT INSERT ON TABLE exo.members TO "userio";
+GRANT ALL ON TABLE exo.members TO "userall" WITH GRANT OPTION;
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE exo.members TO "userall";
 
 
 -- Completed on 2019-03-09 16:49:18
