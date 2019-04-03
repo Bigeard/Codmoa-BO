@@ -1,14 +1,14 @@
 <?php
 session_start();
-if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
+if (!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
     header('Location: ../../index.php?error=2');
 }
 require "navbar.php";
 require "../library/API/DatabaseAPI.php";
 $api = new DatabaseAPI();
-$permissions_list = $api->checkDatabaseRoles($_SESSION["username"]);
+$admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
 
-?> 
+?>
 <!DOCTYPE html>
 <html>
 
@@ -25,20 +25,18 @@ $permissions_list = $api->checkDatabaseRoles($_SESSION["username"]);
     <h1>Connected</h1>
 
     <div class="buttons-wrapper">
-        <?php if (count($permissions_list) <= 0) : ?>
+        <?php if (count($admin_permissions) <= 0) : ?>
             <p>Cet Utilisateur n'a aucune Permission</p>
-        <?php else : ?>
+            <?php else : ?>
             <!--Check User permissions -->
-            <?php foreach ($permissions_list as $permission) { ?>
-                <?php if (strpos($permission->case, 'superuser') !== false): ?>
-                    <a href="#"><button>MANAGE USERS</button></a>
+            <?php foreach ($admin_permissions as $permission) { ?>
+                <?php if (strpos($permission->case, 'superuser') !== false) : ?>
+                    <a href="#"><button>Manage Users</button></a>
                 <?php endif; ?>
-                <?php if (strpos($permission->case, 'CREATE DATABASE') !== false): ?>
-                    <a href="#"><button>CREATE SCHEMA</button></a>
+                <?php if (strpos($permission->case, 'CREATE DATABASE') !== false) : ?>
+                    <a href="#"><button>Create Schema</button></a>
                 <?php endif; ?>
-                
             <?php } ?>
-
         <?php endif; ?>
     </div>
 </body>
