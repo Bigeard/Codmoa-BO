@@ -38,22 +38,58 @@ $permissions = $api->selectPermissionsByUser($_POST["update_user"]);
                         <div class="permissions-wrapper">
                             <div class="permission-item">
                                 <label for="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>">INSERT</label>
-                                <input type="checkbox" name="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                <?php foreach ($permissions as $index=>$permission) { ?>
+                                    <?php if ($permission->table_schema == $schema->table_schema && $permission->table_name == $table->table_name && $permission->privilege_type == 'INSERT') : ?>
+                                        <input type="checkbox" name="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>" checked>
+                                        <?php break; ?>
+                                    <?php else : ?>
+                                        <?php if($index >= count($permissions) -1) : ?>
+                                            <input type="checkbox" name="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php } ?>
                             </div>
                             
                             <div class="permission-item">
                                 <label for="select_<?= $table->table_schema ?>.<?= $table->table_name ?>">SELECT</label>
-                                <input type="checkbox" name="select_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="select_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                <?php foreach ($permissions as $index=>$permission) { ?>
+                                    <?php if ($permission->table_schema == $schema->table_schema && $permission->table_name == $table->table_name && $permission->privilege_type == 'SELECT') : ?>
+                                        <input type="checkbox" name="select_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="select_<?= $table->table_schema ?>.<?= $table->table_name ?>" checked>
+                                        <?php break; ?>
+                                    <?php else : ?>
+                                        <?php if($index >= count($permissions) -1) : ?>
+                                            <input type="checkbox" name="select_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="select_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php } ?>
                             </div>      
 
                             <div class="permission-item">
                                 <label for="update_<?= $table->table_schema ?>.<?= $table->table_name ?>">UPDATE</label>
-                                <input type="checkbox" name="update_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="update_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                <?php foreach ($permissions as $index=>$permission) { ?>
+                                    <?php if ($permission->table_schema == $schema->table_schema && $permission->table_name == $table->table_name && $permission->privilege_type == 'UPDATE') : ?>
+                                        <input type="checkbox" name="update_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="update_<?= $table->table_schema ?>.<?= $table->table_name ?>" checked>
+                                        <?php break; ?>
+                                    <?php else : ?>
+                                        <?php if($index >= count($permissions) -1) : ?>
+                                            <input type="checkbox" name="update_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="update_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php } ?>
                             </div>  
 
                             <div class="permission-item">
                                 <label for="delete_<?= $table->table_schema ?>.<?= $table->table_name ?>">DELETE</label>
-                                <input type="checkbox" name="delete_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="delete_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                <?php foreach ($permissions as $index=>$permission) { ?>
+                                    <?php if ($permission->table_schema == $schema->table_schema && $permission->table_name == $table->table_name && $permission->privilege_type == 'DELETE') : ?>
+                                        <input type="checkbox" name="delete_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="delete_<?= $table->table_schema ?>.<?= $table->table_name ?>" checked>
+                                        <?php break; ?>
+                                    <?php else : ?>
+                                        <?php if($index >= count($permissions) -1) : ?>
+                                            <input type="checkbox" name="delete_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="delete_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php } ?>
                             </div>  
                         </div>
                     <?php } ?>
