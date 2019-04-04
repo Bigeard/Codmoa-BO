@@ -1,3 +1,4 @@
+@import url(c:\wamp64\www\Codmoa-BO\styles\reset.css);
 body {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -19,13 +20,13 @@ body {
   background-size: cover;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   width: 100%;
 }
 
-body.bookings, body.facilities, body.members, body.insertMember {
-  overflow-y: scroll;
-  height: auto;
+body.permissions {
+  overflow-y: hidden;
 }
 
 body h1 {
@@ -56,6 +57,33 @@ body form .form-wrapper {
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+body form .permissions-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body form .permissions-wrapper .permission-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;

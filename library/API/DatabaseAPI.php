@@ -8,24 +8,30 @@ class DatabaseAPI extends ConnectionAPI
     public function createUser($username, $password, $isAdmin)
     {
 
-        $this->connectDB($_SESSION["username"], $_SESSION["password"]);
+        try {
+            $this->connectDB($_SESSION["username"], $_SESSION["password"]);
 
 
-        $sql1 = "CREATE USER $username WITH PASSWORD '$password';";
-        $stmt1 = $this->connection->prepare($sql1);
-        $stmt1->execute();
+            $sql1 = "CREATE USER $username WITH PASSWORD '$password';";
+            $stmt1 = $this->connection->prepare($sql1);
+            $stmt1->execute();
 
-        $sql2 = "GRANT CONNECT ON DATABASE codmoa TO $username;";
-        $stmt2 = $this->connection->prepare($sql2);
-        $stmt2->execute();
+            $sql2 = "GRANT CONNECT ON DATABASE codmoa TO $username;";
+            $stmt2 = $this->connection->prepare($sql2);
+            $stmt2->execute();
 
-        if ($isAdmin) {
-            $sql3 = "ALTER USER $username WITH SUPERUSER CREATEDB;";
-            $stmt3 = $this->connection->prepare($sql3);
-            $stmt3->execute();
+            if ($isAdmin) {
+                $sql3 = "ALTER USER $username WITH SUPERUSER CREATEDB;";
+                $stmt3 = $this->connection->prepare($sql3);
+                $stmt3->execute();
+            }
+
+            $this->disconnectDB();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
         }
-
-        $this->disconnectDB();
     }
 
     public function checkDatabaseRoles($user)
@@ -41,30 +47,6 @@ class DatabaseAPI extends ConnectionAPI
                   FROM pg_catalog.pg_user u
                   WHERE u.usename = :user
                   ORDER BY 1;";
-
-        $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(':user', $user);
-        $stmt->execute();
-
-        $tab = [];
-        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tab[] = $result;
-        }
-        $this->disconnectDB();
-
-        return $tab;
-    }
-
-    public function isAdmin($user)
-    {
-        $this->connectDB('postgres', 'P@ssw0rd');
-
-        $sql = "SELECT DISTINCT
-                        privilege_type
-                    FROM   
-                        information_schema.role_table_grants
-                    WHERE  
-                        grantee = :user";
 
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(':user', $user);
@@ -144,5 +126,85 @@ class DatabaseAPI extends ConnectionAPI
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    public function selectPermissionsByUser($user)
+    {
+        $this->connectDB('postgres', 'P@ssw0rd');
+
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    information_schema.role_table_grants 
+                WHERE 
+                    table_schema != 'pg_catalog'
+                AND 
+                    table_schema != 'information_schema'
+                AND
+                    grantee = :user
+                ORDER BY
+                    table_schema;";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':user', $user);
+        $stmt->execute();
+
+        $tab = [];
+        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $tab[] = $result;
+        }
+        $this->disconnectDB();
+
+        return $tab;
+    }
+
+    public function selectAllTables() {
+
+        $this->connectDB('postgres', 'P@ssw0rd');
+
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    information_schema.tables
+                WHERE 
+                    table_schema != 'pg_catalog'
+                AND 
+                    table_schema != 'information_schema';";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        $tab = [];
+        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $tab[] = $result;
+        }
+        $this->disconnectDB();
+
+        return $tab;
+    }
+
+    public function selectAllSchemas() {
+
+        $this->connectDB('postgres', 'P@ssw0rd');
+
+        $sql = "SELECT DISTINCT
+                    table_schema
+                FROM 
+                    information_schema.tables
+                WHERE 
+                    table_schema != 'pg_catalog'
+                AND 
+                    table_schema != 'information_schema';";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        $tab = [];
+        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $tab[] = $result;
+        }
+        $this->disconnectDB();
+
+        return $tab;
     }
 }

@@ -13,7 +13,7 @@ $users = $api->selectAllUsers();
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Remove User</title>
+    <title>Update Permissions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../styles/main.css" />
     <!--<script src="main.js"></script>-->
@@ -21,22 +21,16 @@ $users = $api->selectAllUsers();
 
 <body>
     <a href="./requests.php"><button class="return" style="position:fixed;">Return</button></a>
-    <h1>Remove User</h1>
+    <h1>Update Permissions</h1>
 
-    <form action="../library/processing.php" method="POST">
-        <select name="remove_user">
+    <form action="./updatePermissionsUser.php" method="POST">
+        <select name="update_user">
             <?php foreach ($users as $user) { ?>
                 <option value="<?= $user->usename ?>"><?= $user->usename ?></option>
             <?php } ?>
         </select>
-        <input type="submit" value="Remove">
+        <input type="submit" value="Select">
     </form>
-
-    <?php if(isset($_GET['error'])) { ?>
-        <?php if($_GET['error'] == 1) : ?>
-            <p>Unable to remove user</p>
-        <?php endif; ?>
-    <?php } ?>
 </body>
 
 </html>

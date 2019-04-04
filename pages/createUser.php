@@ -33,6 +33,12 @@ if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
         </div>
         <input type="submit" value="Send">
     </form>
+
+    <?php if(isset($_GET['error'])) { ?>
+        <?php if($_GET['error'] == 1) : ?>
+            <p>Error while creating user</p>            
+        <?php endif; ?>
+    <?php } ?>
 </body>
 
 </html>

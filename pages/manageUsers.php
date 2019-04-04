@@ -24,7 +24,7 @@ require "navbar.php";
     <div class="buttons-wrapper">
         <a href="./createUser.php"><button>Add User</button></a>
         <a href="./removeUser.php"><button>Remove User</button></a>
-        <a href="#"><button>Update permissions</button></a>
+        <a href="./updatePermissions.php"><button>Update permissions</button></a>
     </div>
 
 </body>
