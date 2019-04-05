@@ -43,11 +43,14 @@ $permissions = $api->selectPermissionsByUser($_POST["update_user"]);
                                         <input type="checkbox" name="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>" checked>
                                         <?php break; ?>
                                     <?php else : ?>
-                                        <?php if($index >= count($permissions) -1) : ?>
+                                        <?php if($index >= count($permissions) -1 || !$permissions) : ?>
                                             <input type="checkbox" name="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>">
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 <?php } ?>
+                                <?php if (!$permissions) : ?>
+                                    <input type="checkbox" name="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="insert_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                <?php endif; ?>
                             </div>
                             
                             <div class="permission-item">
@@ -62,6 +65,9 @@ $permissions = $api->selectPermissionsByUser($_POST["update_user"]);
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 <?php } ?>
+                                <?php if (!$permissions) : ?>
+                                    <input type="checkbox" name="select_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="select_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                <?php endif; ?>
                             </div>      
 
                             <div class="permission-item">
@@ -76,6 +82,9 @@ $permissions = $api->selectPermissionsByUser($_POST["update_user"]);
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 <?php } ?>
+                                <?php if (!$permissions) : ?>
+                                    <input type="checkbox" name="update_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="update_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                <?php endif; ?>
                             </div>  
 
                             <div class="permission-item">
@@ -90,6 +99,9 @@ $permissions = $api->selectPermissionsByUser($_POST["update_user"]);
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 <?php } ?>
+                                <?php if (!$permissions) : ?>
+                                    <input type="checkbox" name="delete_<?= $table->table_schema ?>.<?= $table->table_name ?>" id="delete_<?= $table->table_schema ?>.<?= $table->table_name ?>">
+                                <?php endif; ?>
                             </div>  
                         </div>
                     <?php } ?>
