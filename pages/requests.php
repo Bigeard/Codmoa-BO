@@ -18,7 +18,6 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
     <title>Requests</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../styles/main.css" />
-    <script src="../js/konami.js"></script>
 </head>
 
 <body>
