@@ -116,7 +116,7 @@ elseif (isset($_POST["update_user"])) {
                 }
             }
         }
-        header('Location: ../pages/requests.php?');
+        header('Location: ../pages/requests.php');
         exit;
     } catch (Exception $e) {
         header('Location: ../pages/requests.php?updateError=1');

@@ -17,6 +17,7 @@ if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
 </head>
 
 <body>
+    <a href="./modifyDb.php" class="return">Return</a>
     <h1>Create Schema</h1>
 
     <form action="../library/processing.php" method="POST">

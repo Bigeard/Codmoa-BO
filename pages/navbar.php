@@ -1,1 +1,0 @@
-<a href="../library/disconnect.php"><button class="disconnect" style="position:fixed;">Disconnect</button></a>
