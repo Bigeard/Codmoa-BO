@@ -25,7 +25,7 @@ CREATE ROLE userall LOGIN
 
 
 /*Create Database*/
-CREATE DATABASE cours
+CREATE DATABASE codmoa
   WITH OWNER = postgres
        ENCODING = 'UTF8'
        TABLESPACE = pg_default
@@ -54,18 +54,14 @@ GRANT USAGE ON SCHEMA exo TO userall;
 /*Members*/
 CREATE TABLE exo.members
 (
-  memid integer NOT NULL,
+  memid SERIAL NOT NULL,
   surname character varying(200) NOT NULL,
   firstname character varying(200) NOT NULL,
   address character varying(300) NOT NULL,
   zipcode integer NOT NULL,
   telephone character varying(20) NOT NULL,
   recommendedby integer,
-  joindate timestamp without time zone NOT NULL,
-  CONSTRAINT members_pk PRIMARY KEY (memid),
-  CONSTRAINT fk_members_recommendedby FOREIGN KEY (recommendedby)
-      REFERENCES exo.members (memid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE SET NULL
+  joindate timestamp without time zone NOT NULL
 )
 WITH (
   OIDS=FALSE
@@ -81,13 +77,12 @@ GRANT ALL ON TABLE exo.members TO userall;
 /*Facilities*/
 CREATE TABLE exo.facilities
 (
-  facid integer NOT NULL,
+  facid SERIAL NOT NULL,
   name character varying(100) NOT NULL,
   membercost numeric NOT NULL,
   guestcost numeric NOT NULL,
   initialoutlay numeric NOT NULL,
-  monthlymaintenance numeric NOT NULL,
-  CONSTRAINT facilities_pk PRIMARY KEY (facid)
+  monthlymaintenance numeric NOT NULL
 )
 WITH (
   OIDS=FALSE
@@ -103,18 +98,11 @@ GRANT ALL ON TABLE exo.facilities TO userall;
 /*Bookings*/
 CREATE TABLE exo.bookings
 (
-  bookid integer NOT NULL,
+  bookid SERIAL NOT NULL,
   facid integer NOT NULL,
   memid integer NOT NULL,
   starttime timestamp without time zone NOT NULL,
-  slots integer NOT NULL,
-  CONSTRAINT bookings_pk PRIMARY KEY (bookid),
-  CONSTRAINT fk_bookings_facid FOREIGN KEY (facid)
-      REFERENCES exo.facilities (facid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_bookings_memid FOREIGN KEY (memid)
-      REFERENCES exo.members (memid) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+  slots integer NOT NULL
 )
 WITH (
   OIDS=FALSE

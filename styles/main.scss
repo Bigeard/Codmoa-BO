@@ -100,6 +100,12 @@ body {
             &[type=checkbox] {
                 width: 26px;
             }
+            &[type=file] {
+                width: auto;
+                padding: 0;
+                color: #fff;
+                text-align: center;
+            }
         }
     }
 
