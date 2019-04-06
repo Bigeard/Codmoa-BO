@@ -11,19 +11,19 @@ require "navbar.php";
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Manage Users</title>
+    <title>Modify Database</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../styles/main.css" />
-    <!--<script src="main.js"></script>-->
 </head>
 
 <body>
-    <h1>Manage Users</h1>
+    <h1>Modify Database</h1>
 
     <div class="buttons-wrapper">
-        <a href="./createUser.php"><button>Add User</button></a>
-        <a href="./removeUser.php"><button>Remove User</button></a>
-        <a href="./updatePermissions.php"><button>Update permissions</button></a>
+        <a href="./createSchema.php"><button>Create Schema</button></a>
+        <a href="./removeSchema.php"><button>Remove Schema</button></a>
+        <a href="./createTable.php"><button>Create Table</button></a>
+        <a href="./removeTable.php"><button>Remove Table</button></a>
     </div>
 
 </body>

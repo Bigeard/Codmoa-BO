@@ -33,7 +33,7 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
                     <a href="./manageUsers.php"><button>Manage Users</button></a>
                 <?php endif; ?>
                 <?php if (strpos($permission->case, 'CREATE DATABASE') !== false) : ?>
-                    <a href="#"><button>Modify Database</button></a>
+                    <a href="./modifyDatabase.php"><button>Modify Database</button></a>
                 <?php endif; ?>
                 <a href="#"><button>Navigate Database</button></a>
             <?php } ?>

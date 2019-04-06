@@ -4,7 +4,7 @@ require_once 'ConnectionAPI.php';
 class DatabaseAPI extends ConnectionAPI
 {
 
-    //Add USer
+    //Add User
     public function createUser($username, $password, $isAdmin)
     {
 
@@ -51,6 +51,26 @@ class DatabaseAPI extends ConnectionAPI
             $sql3 = "DROP USER $user;";
             $stmt3 = $this->connection->prepare($sql3);
             $stmt3->execute();
+
+            $this->disconnectDB();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    //Add Schema
+    public function createSchema($name)
+    {
+
+        try {
+            $this->connectDB('postgres', 'P@ssw0rd');
+
+
+            $sql = "CREATE SCHEMA $name;";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
 
             $this->disconnectDB();
 
