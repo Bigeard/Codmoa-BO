@@ -3,4 +3,5 @@
     $_SESSION['password'] = null;
     session_destroy();
     header('Location: ../index.php');
+    exit;
 ?>

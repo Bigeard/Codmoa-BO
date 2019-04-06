@@ -8,6 +8,7 @@
 
         const DNS = 'pgsql:host=' . self::HOST . ';dbname=' . self::DBNAME;
 
+        //PDO Connect
         public static function connectDB($user, $password){
             try{
                 self::$instance = new PDO(self::DNS, $user, $password, array( PDO::ATTR_TIMEOUT => 100, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION ));
@@ -21,6 +22,7 @@
             }
         }
 
+        //PDO Disconnect
         public static function disconnectDB(){
             self::$instance = null;
         }
