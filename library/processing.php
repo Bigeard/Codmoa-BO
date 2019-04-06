@@ -29,6 +29,18 @@ elseif (isset($_POST["remove_user"])) {
     }
 }
 
+//Add Schema
+elseif (isset($_POST["schema_name"])) {
+    $schema = new DatabaseAPI();
+    if ($schema->createSchema($_POST['schema_name'])) {
+        header('Location: ../pages/requests.php');
+        exit;
+    } else {
+        header('Location: ../pages/createSchema.php?error=1');
+        exit;
+    }
+}
+
 //Update permissions of User
 elseif (isset($_POST["update_user"])) {
     try {
