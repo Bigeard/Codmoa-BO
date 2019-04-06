@@ -1,31 +1,17 @@
 <?php
-session_start();
-if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
-    header('Location: ../../index.php?error=2');
-}
-require "../library/API/DatabaseAPI.php";
+require "../header.php"; 
+require "../../library/API/DatabaseAPI.php";
 $api = new DatabaseAPI();
 $schemas = $api->selectAllSchemas();
 $tables = $api->selectAllTables();
 $permissions = $api->selectPermissionsByUser($_POST["update_user"]);
 ?> 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Update Permissions</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../styles/main.css" />
-    <!--<script src="main.js"></script>-->
-</head>
-
-<body class="permissions">
-    <a href="./requests.php"><button class="return" style="position:fixed;">Return</button></a>
+<!-- <body> -->
+    <a href="./updatePermissions.php" class="return">Return</a>
     <h1>Update Permissions for <?= $_POST["update_user"] ?></h1>
 
-    <form action="../library/processing.php" method="POST">
+    <form action="../../library/processing.php" method="POST">
         <div class="form-wrapper">
             <?php foreach ($schemas as $schema) { ?>
                 <h1><?= $schema->table_schema ?></h1>

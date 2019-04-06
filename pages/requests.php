@@ -1,27 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
-    header('Location: ../../index.php?error=2');
-}
-require "navbar.php";
+require "./header.php";
 require "../library/API/DatabaseAPI.php";
 $api = new DatabaseAPI();
 $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
-
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Requests</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../styles/main.css" />
-    <script src="../js/konami.js"></script>
-</head>
-
-<body>
+<!-- <body> -->
     <h1>Connected</h1>
 
     <div class="buttons-wrapper">
@@ -30,16 +14,14 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
             <?php else : ?>
             <!--Check User permissions -->
             <?php foreach ($admin_permissions as $permission) { ?>
-                <?php if (strpos($permission->case, 'superuser') !== false) : ?>
-                    <a href="./manageUsers.php"><button>Manage Users</button></a>
-                <?php endif; ?>
+                <a href="./navigateDb.php">Navigate Database</a>
                 <?php if (strpos($permission->case, 'CREATE DATABASE') !== false) : ?>
-                    <a href="#"><button>Modify Database</button></a>
+                    <a href="./modifyDb.php">Modify Database</a>
+                <?php endif; if (strpos($permission->case, 'superuser') !== false) :?>
+                    <a href="./user/manageUsers.php">Manage Users</a>
                 <?php endif; ?>
-                    <a href="#"><button>Navigate Database</button></a>
             <?php } ?>
         <?php endif; ?>
     </div>
 </body>
-
 </html>

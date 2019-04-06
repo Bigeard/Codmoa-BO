@@ -1,26 +1,10 @@
-<?php
-session_start();
-if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])) {
-    header('Location: ../../index.php?error=2');
-}
-?> 
-<!DOCTYPE html>
-<html>
+<?php require "../header.php"; ?> 
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Create User</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../styles/main.css" />
-    <!--<script src="main.js"></script>-->
-</head>
-
-<body>
-    <a href="./requests.php"><button class="return" style="position:fixed;">Return</button></a>
+<!-- <body> -->
+    <a href="./manageUsers.php" class="return">Return</a>
     <h1>Create User</h1>
 
-    <form action="../library/processing.php" method="POST">
+    <form action="../../library/processing.php" method="POST">
         <div class="form-wrapper">
             <label for="user_name">Name: </label>
             <input type="text" name="add_username" id="user_name" required>
