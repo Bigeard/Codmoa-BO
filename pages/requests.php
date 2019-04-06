@@ -27,7 +27,7 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
     <div class="buttons-wrapper">
         <?php if (count($admin_permissions) <= 0) : ?>
             <p>Cet Utilisateur n'a aucune Permission</p>
-            <?php else : ?>
+        <?php else : ?>
             <!--Check User permissions -->
             <?php foreach ($admin_permissions as $permission) { ?>
                 <?php if (strpos($permission->case, 'superuser') !== false) : ?>
@@ -36,10 +36,14 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
                 <?php if (strpos($permission->case, 'CREATE DATABASE') !== false) : ?>
                     <a href="#"><button>Modify Database</button></a>
                 <?php endif; ?>
-                    <a href="#"><button>Navigate Database</button></a>
+                <a href="#"><button>Navigate Database</button></a>
             <?php } ?>
         <?php endif; ?>
     </div>
+
+    <?php if (isset($_GET['updateError'])) { ?>
+        <p>Error while Updating permissions</p>
+    <?php } ?>
 </body>
 
 </html>

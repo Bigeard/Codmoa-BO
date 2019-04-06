@@ -4,7 +4,7 @@ require_once 'ConnectionAPI.php';
 class DatabaseAPI extends ConnectionAPI
 {
 
-    //Usage of PDO
+    //Add USer
     public function createUser($username, $password, $isAdmin)
     {
 
@@ -34,6 +34,107 @@ class DatabaseAPI extends ConnectionAPI
         }
     }
 
+    //Remove User
+    public function removeUser($user)
+    {
+        try {
+            $this->connectDB('postgres', 'P@ssw0rd');
+
+            $sql1 = "REASSIGN OWNED BY $user TO trashbin;";
+            $stmt1 = $this->connection->prepare($sql1);
+            $stmt1->execute();
+
+            $sql2 = "DROP OWNED BY $user;";
+            $stmt2 = $this->connection->prepare($sql2);
+            $stmt2->execute();
+
+            $sql3 = "DROP USER $user;";
+            $stmt3 = $this->connection->prepare($sql3);
+            $stmt3->execute();
+
+            $this->disconnectDB();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    
+    //Select all users
+    public function selectAllUsers()
+    {
+        $this->connectDB('postgres', 'P@ssw0rd');
+
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    pg_user;";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        $tab = [];
+        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $tab[] = $result;
+        }
+        $this->disconnectDB();
+
+        return $tab;
+    }
+    
+    //Select all tables
+    public function selectAllTables() {
+
+        $this->connectDB('postgres', 'P@ssw0rd');
+
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    information_schema.tables
+                WHERE 
+                    table_schema != 'pg_catalog'
+                AND 
+                    table_schema != 'information_schema';";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        $tab = [];
+        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $tab[] = $result;
+        }
+        $this->disconnectDB();
+
+        return $tab;
+    }
+    
+    //Select all schemas
+    public function selectAllSchemas() {
+
+        $this->connectDB('postgres', 'P@ssw0rd');
+
+        $sql = "SELECT DISTINCT
+                    table_schema
+                FROM 
+                    information_schema.tables
+                WHERE 
+                    table_schema != 'pg_catalog'
+                AND 
+                    table_schema != 'information_schema';";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        $tab = [];
+        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $tab[] = $result;
+        }
+        $this->disconnectDB();
+
+        return $tab;
+    }
+
+    //Check user role on database (superuser, create)
     public function checkDatabaseRoles($user)
     {
         $this->connectDB('postgres', 'P@ssw0rd');
@@ -61,6 +162,7 @@ class DatabaseAPI extends ConnectionAPI
         return $tab;
     }
 
+    //Check if user has CONNECT permission on database
     public function checkConnectionRight($user)
     {
         $this->connectDB('postgres', 'P@ssw0rd');
@@ -82,52 +184,7 @@ class DatabaseAPI extends ConnectionAPI
         }
     }
 
-    public function selectAllUsers()
-    {
-        $this->connectDB('postgres', 'P@ssw0rd');
-
-        $sql = "SELECT 
-                    * 
-                FROM 
-                    pg_user;";
-
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute();
-
-        $tab = [];
-        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tab[] = $result;
-        }
-        $this->disconnectDB();
-
-        return $tab;
-    }
-
-    public function removeUser($user)
-    {
-        try {
-            $this->connectDB('postgres', 'P@ssw0rd');
-
-            $sql1 = "REASSIGN OWNED BY $user TO trashbin;";
-            $stmt1 = $this->connection->prepare($sql1);
-            $stmt1->execute();
-
-            $sql2 = "DROP OWNED BY $user;";
-            $stmt2 = $this->connection->prepare($sql2);
-            $stmt2->execute();
-
-            $sql3 = "DROP USER $user;";
-            $stmt3 = $this->connection->prepare($sql3);
-            $stmt3->execute();
-
-            $this->disconnectDB();
-
-            return true;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-
+    //Select permissions on all tables by user
     public function selectPermissionsByUser($user)
     {
         $this->connectDB('postgres', 'P@ssw0rd');
@@ -158,53 +215,53 @@ class DatabaseAPI extends ConnectionAPI
         return $tab;
     }
 
-    public function selectAllTables() {
+    //Grant permission to user
+    public function grantPermission($privilege, $schema, $table, $user)
+    {
+        try {
+            $this->connectDB('postgres', 'P@ssw0rd');
 
-        $this->connectDB('postgres', 'P@ssw0rd');
+            $sql = "GRANT 
+                        $privilege
+                    ON 
+                        $schema.$table 
+                    TO 
+                        $user;";
+    
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+    
+            $this->disconnectDB();
 
-        $sql = "SELECT 
-                    * 
-                FROM 
-                    information_schema.tables
-                WHERE 
-                    table_schema != 'pg_catalog'
-                AND 
-                    table_schema != 'information_schema';";
-
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute();
-
-        $tab = [];
-        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tab[] = $result;
+            return true;
         }
-        $this->disconnectDB();
-
-        return $tab;
+        catch (Exception $e) {
+            return $e;
+        }
     }
 
-    public function selectAllSchemas() {
+    //Revoke permission to user
+    public function revokePermission($privilege, $schema, $table, $user)
+    {
+        try {
+            $this->connectDB('postgres', 'P@ssw0rd');
 
-        $this->connectDB('postgres', 'P@ssw0rd');
+            $sql = "REVOKE 
+                        $privilege
+                    ON 
+                        $schema.$table 
+                    FROM 
+                        $user;";
+    
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+    
+            $this->disconnectDB();
 
-        $sql = "SELECT DISTINCT
-                    table_schema
-                FROM 
-                    information_schema.tables
-                WHERE 
-                    table_schema != 'pg_catalog'
-                AND 
-                    table_schema != 'information_schema';";
-
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute();
-
-        $tab = [];
-        while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $tab[] = $result;
+            return true;
         }
-        $this->disconnectDB();
-
-        return $tab;
+        catch (Exception $e) {
+            return $e;
+        }
     }
 }
