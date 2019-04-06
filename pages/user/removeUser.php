@@ -4,7 +4,7 @@
     <a href="./manageUsers.php" class="return">Return</a>
     <h1>Remove User</h1>
 
-    <form action="../library/processing.php" method="POST">
+    <form action="../../library/processing.php" method="POST">
         <select name="remove_user">
             <?php foreach ($users as $user) { ?>
                 <option value="<?= $user->usename ?>"><?= $user->usename ?></option>

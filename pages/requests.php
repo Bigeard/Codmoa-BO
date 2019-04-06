@@ -11,7 +11,7 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
     <div class="buttons-wrapper">
         <?php if (count($admin_permissions) <= 0) : ?>
             <p>Cet Utilisateur n'a aucune Permission</p>
-            <?php else : ?>
+        <?php else : ?>
             <!--Check User permissions -->
             <?php foreach ($admin_permissions as $permission) { ?>
                 <a href="./navigateDb.php">Navigate Database</a>
@@ -23,5 +23,9 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
             <?php } ?>
         <?php endif; ?>
     </div>
+
+    <?php if (isset($_GET['updateError'])) { ?>
+        <p>Error while Updating permissions</p>
+    <?php } ?>
 </body>
 </html>
