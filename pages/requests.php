@@ -18,6 +18,7 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
                 <?php if (strpos($permission->case, 'CREATE DATABASE') !== false) : ?>
                     <a href="./modifyDb.php">Modify Database</a>
                     <a href="./importDb.php">Import Database</a>
+                    <a href="./scriptSql.php">Script SQL</a>
                 <?php endif; if (strpos($permission->case, 'superuser') !== false) :?>
                     <a href="./user/manageUsers.php">Manage Users</a>
                 <?php endif; ?>
