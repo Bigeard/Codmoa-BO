@@ -15,13 +15,26 @@ body {
     min-height: 100vh;
     width: 100%;
 
-    &.permissions {
+    &.permissions,
+    &.modifyDb {
         overflow-y: auto;
     }
 
     h1 {
         color: #FFFFFF;
         font-size: 3rem;
+        font-weight: 400;
+    }
+
+    h2 {
+        color: #AAAAAA;
+        font-size: 2.5rem;
+        font-weight: 400;
+    }
+
+    h3 {
+        color: #888888;
+        font-size: 1.5rem;
         font-weight: 400;
     }
 
@@ -77,6 +90,7 @@ body {
             color: rgba(100, 100, 100, 0.7);
             height: 50px;
             width: 200px;
+
             &[type=text],
             &[type=password],
             &[type=number],
@@ -85,6 +99,7 @@ body {
                 text-indent: 10px;
                 width: 300px;
             }
+
             &[type=submit] {
                 background-color: #fff;
                 transition: 0.3s;
@@ -92,14 +107,17 @@ body {
                 text-align: center;
                 width: 150px;
             }
+
             &[type=submit]:hover {
                 background-color: #3e2e9066;
                 color: #fff;
                 transition: 0.3s;
             }
+
             &[type=checkbox] {
                 width: 26px;
             }
+
             &[type=file] {
                 width: auto;
                 padding: 0;
@@ -109,7 +127,7 @@ body {
         }
     }
 
-    
+
     a {
         cursor: pointer;
         width: 300px;
@@ -161,6 +179,85 @@ body {
         }
     }
 
+    .database-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 25%;
+
+        a {
+            &.icon {
+                cursor: pointer;
+                width: auto;
+                background-color: transparent;
+                color: none;
+                text-align: center;
+                vertical-align: middle;
+                text-decoration: none;
+                border: none;
+                border-radius: none;
+                transition-property: none;
+                font-size: 25px;
+                margin: 0px;
+                padding: 0px;
+                text-align: center;
+                box-shadow: none;
+
+                &:hover {
+                    background-color: transparent;
+                    color: none;
+                }
+            }
+
+            &.addTable {
+                border-radius: 30px;
+                width: auto;
+            }
+
+            &.addSchema {
+                border-radius: 30px;
+                width: 100%;
+            }
+        }
+
+        .schema-wrapper,
+        .table-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 30px;
+            margin: 20px;
+            height: 150px;
+            width: 100%;
+
+            .schema-left,
+            .table-left {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 48%;
+            }
+
+            .schema-right,
+            .table-right {
+                display: flex;
+                justify-content: end;
+                align-items: baseline;
+                height: 80%;
+                width: 48%;
+
+                .icons-wrapper {}
+            }
+        }
+
+        .table-wrapper {
+            height: 100px;
+            width: 60%;
+        }
+    }
+
     p {
         color: red;
         font-size: 1.3rem;
@@ -179,161 +276,4 @@ body {
         flex-wrap: wrap;
         flex-direction: column;
     }
-
-
-    .cards-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        width: 70%;
-
-        .card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            border-radius: 30px;
-            margin: 20px;
-            height: 250px;
-            width: 450px;
-
-            .booking-card-left {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-direction: column;
-                border-right: solid 1px #000;
-                height: 80%;
-                width: 30%;
-                h1 {
-                    color: #000;
-                }
-                p {
-                    color: #000;
-                }
-            }
-            .booking-card-right {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-direction: column;
-                height: 80%;
-                width: 70%;
-                .booking-card-member {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    width: 90%;
-                    h2 {
-                        text-transform: uppercase;
-                        text-align: left;
-                        width: 100%;
-                    }
-                }
-                .booking-card-label {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    width: 90%;
-                    p {
-                        text-shadow: none;
-                        color: #64646499;
-                        text-align: left;
-                    }
-                }
-            }
-        
-            .facility-card-left {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-direction: column;
-                border-right: solid 1px #000;
-                height: 80%;
-                width: 30%;
-                h1 {
-                    color: #000;
-                }
-            }
-            .facility-card-right {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-direction: column;
-                height: 80%;
-                width: 70%;
-                .facility-card-name {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    width: 90%;
-                    h2 {
-                        text-transform: uppercase;
-                        text-align: left;
-                        width: 100%;
-                    }
-                }
-                .facility-card-prices {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    width: 90%;
-                    p {
-                        text-shadow: none;
-                        color: #64646499;
-                        text-align: left;
-                    }
-                }
-            }
-
-            .member-card-left {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-direction: column;
-                border-right: solid 1px #000;
-                height: 80%;
-                width: 30%;
-                h1 {
-                    color: #000;
-                }
-                p {
-                    color: #000;
-                }
-            }
-            .member-card-right {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-direction: column;
-                height: 80%;
-                width: 70%;
-                .member-card-member {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    width: 90%;
-                    h2 {
-                        text-transform: uppercase;
-                        text-align: left;
-                        width: 100%;
-                    }
-                }
-                .member-card-label {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    width: 90%;
-                    p {
-                        text-shadow: none;
-                        color: #64646499;
-                        text-align: left;
-                    }
-                }
-            }
-        }
-    }
-    
-    
 }

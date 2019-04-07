@@ -26,13 +26,25 @@ body {
   width: 100%;
 }
 
-body.permissions {
+body.permissions, body.modifyDb {
   overflow-y: auto;
 }
 
 body h1 {
   color: #FFFFFF;
   font-size: 3rem;
+  font-weight: 400;
+}
+
+body h2 {
+  color: #AAAAAA;
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+body h3 {
+  color: #888888;
+  font-size: 1.5rem;
   font-weight: 400;
 }
 
@@ -216,6 +228,113 @@ body .return:hover {
   background-color: #2a33b67e;
 }
 
+body .database-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 25%;
+}
+
+body .database-wrapper a.icon {
+  cursor: pointer;
+  width: auto;
+  background-color: transparent;
+  color: none;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  border: none;
+  border-radius: none;
+  -webkit-transition-property: none;
+  transition-property: none;
+  font-size: 25px;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+body .database-wrapper a.icon:hover {
+  background-color: transparent;
+  color: none;
+}
+
+body .database-wrapper a.addTable {
+  border-radius: 30px;
+  width: auto;
+}
+
+body .database-wrapper a.addSchema {
+  border-radius: 30px;
+  width: 100%;
+}
+
+body .database-wrapper .schema-wrapper,
+body .database-wrapper .table-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  border-radius: 30px;
+  margin: 20px;
+  height: 150px;
+  width: 100%;
+}
+
+body .database-wrapper .schema-wrapper .schema-left,
+body .database-wrapper .schema-wrapper .table-left,
+body .database-wrapper .table-wrapper .schema-left,
+body .database-wrapper .table-wrapper .table-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 48%;
+}
+
+body .database-wrapper .schema-wrapper .schema-right,
+body .database-wrapper .schema-wrapper .table-right,
+body .database-wrapper .table-wrapper .schema-right,
+body .database-wrapper .table-wrapper .table-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  height: 80%;
+  width: 48%;
+}
+
+body .database-wrapper .table-wrapper {
+  height: 100px;
+  width: 60%;
+}
+
 body p {
   color: red;
   font-size: 1.3rem;
@@ -242,279 +361,5 @@ body .buttons-wrapper {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-body .cards-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  width: 70%;
-}
-
-body .cards-wrapper .card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: #fff;
-  border-radius: 30px;
-  margin: 20px;
-  height: 250px;
-  width: 450px;
-}
-
-body .cards-wrapper .card .booking-card-left {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  border-right: solid 1px #000;
-  height: 80%;
-  width: 30%;
-}
-
-body .cards-wrapper .card .booking-card-left h1 {
-  color: #000;
-}
-
-body .cards-wrapper .card .booking-card-left p {
-  color: #000;
-}
-
-body .cards-wrapper .card .booking-card-right {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 80%;
-  width: 70%;
-}
-
-body .cards-wrapper .card .booking-card-right .booking-card-member {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 90%;
-}
-
-body .cards-wrapper .card .booking-card-right .booking-card-member h2 {
-  text-transform: uppercase;
-  text-align: left;
-  width: 100%;
-}
-
-body .cards-wrapper .card .booking-card-right .booking-card-label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 90%;
-}
-
-body .cards-wrapper .card .booking-card-right .booking-card-label p {
-  text-shadow: none;
-  color: #64646499;
-  text-align: left;
-}
-
-body .cards-wrapper .card .facility-card-left {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  border-right: solid 1px #000;
-  height: 80%;
-  width: 30%;
-}
-
-body .cards-wrapper .card .facility-card-left h1 {
-  color: #000;
-}
-
-body .cards-wrapper .card .facility-card-right {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 80%;
-  width: 70%;
-}
-
-body .cards-wrapper .card .facility-card-right .facility-card-name {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 90%;
-}
-
-body .cards-wrapper .card .facility-card-right .facility-card-name h2 {
-  text-transform: uppercase;
-  text-align: left;
-  width: 100%;
-}
-
-body .cards-wrapper .card .facility-card-right .facility-card-prices {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 90%;
-}
-
-body .cards-wrapper .card .facility-card-right .facility-card-prices p {
-  text-shadow: none;
-  color: #64646499;
-  text-align: left;
-}
-
-body .cards-wrapper .card .member-card-left {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  border-right: solid 1px #000;
-  height: 80%;
-  width: 30%;
-}
-
-body .cards-wrapper .card .member-card-left h1 {
-  color: #000;
-}
-
-body .cards-wrapper .card .member-card-left p {
-  color: #000;
-}
-
-body .cards-wrapper .card .member-card-right {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 80%;
-  width: 70%;
-}
-
-body .cards-wrapper .card .member-card-right .member-card-member {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 90%;
-}
-
-body .cards-wrapper .card .member-card-right .member-card-member h2 {
-  text-transform: uppercase;
-  text-align: left;
-  width: 100%;
-}
-
-body .cards-wrapper .card .member-card-right .member-card-label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 90%;
-}
-
-body .cards-wrapper .card .member-card-right .member-card-label p {
-  text-shadow: none;
-  color: #64646499;
-  text-align: left;
 }
 /*# sourceMappingURL=main.css.map */

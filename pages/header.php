@@ -11,7 +11,6 @@ $path = "http://localhost/Codmoa-BO/styles/main.css";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Codmoa</title>
-    <script src="../js/konami.js"></script>
     <link rel="stylesheet" type="text/css" href="<?= $path ?>" />
 </head>
 
