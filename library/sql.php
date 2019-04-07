@@ -53,7 +53,6 @@ if(isset($_POST["import"])) {
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-                $scriptSql = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                 $import = new Sql();
                 $query = '';
                 $sqlScript = file($target_file);
@@ -68,12 +67,14 @@ if(isset($_POST["import"])) {
                         
                     $query = $query . $line;
                     if ($endWith == ';') {
-                        $import->executeSQL($query) or die('<div class="error-response sql-import-response">Problem in executing the SQL query <b>' . $query. '</b></div>');
+                
+                $import->executeSQL($query) or die('<div class="error-response sql-import-response">Problem in executing the SQL query <b>' . $query. '</b></div>'); header('Location:../pages/importDb.php?error=1');
                         $query= '';		
                     }
                 }
                 echo '<div class="success-response sql-import-response">SQL file imported successfully</div>';
-                // header('Location:../../pages/importDb.php?success=2');
+                unlink($target_file);
+                header('Location:../pages/importDb.php?success=1');
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }

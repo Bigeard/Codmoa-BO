@@ -183,7 +183,7 @@ body form textarea {
   transition: -webkit-box-shadow 0.3s;
   transition: box-shadow 0.3s;
   transition: box-shadow 0.3s, -webkit-box-shadow 0.3s;
-  font-size: 30px;
+  font-size: 20px;
   color: rgba(100, 100, 100, 0.7);
   padding: 30px;
 }
@@ -350,7 +350,7 @@ body .database-wrapper .table-wrapper {
 }
 
 body p {
-  color: red;
+  color: #fff;
   font-size: 1.3rem;
   text-shadow: 1px 1px #000;
 }
