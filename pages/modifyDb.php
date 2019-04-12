@@ -32,7 +32,6 @@ $tables = $api->selectAllTables();
                     </div>
                     <div class="table-right">
                         <div class="icons-wrapper">
-                            <a href="#" class="icon"><img src="../assets/icons/edit.svg"></a>    
                             <a href="../library/processing.php?remove=true&schema=<?= $schema->schema_name ?>&table=<?= $table->table_name ?>" class="icon"><img src="../assets/icons/delete.svg"></a>
                         </div>
                     </div>

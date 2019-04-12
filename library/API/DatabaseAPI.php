@@ -107,8 +107,29 @@ class DatabaseAPI extends ConnectionAPI
         try {
             $this->connectDB('postgres', 'P@ssw0rd');
 
+            $sql = "CREATE TABLE IF NOT EXISTS $schema.$table(
+                        id SERIAL PRIMARY KEY
+            );";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
 
-            $sql = "CREATE SCHEMA $name;";
+            $this->disconnectDB();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    //Add Table Column
+    public function addTableColumn($schema, $table, $column_name, $column_type, $column_null)
+    {
+
+        try {
+            $this->connectDB('postgres', 'P@ssw0rd');
+
+            $sql = "ALTER TABLE $schema.$table
+                    ADD COLUMN $column_name $column_type $column_null;";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute();
 
