@@ -189,7 +189,8 @@ body {
         }
     }
 
-    .database-wrapper {
+    .database-wrapper,
+    .users-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -232,7 +233,8 @@ body {
         }
 
         .schema-wrapper,
-        .table-wrapper {
+        .table-wrapper,
+        .user-wrapper {
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -243,7 +245,8 @@ body {
             width: 100%;
 
             .schema-left,
-            .table-left {
+            .table-left,
+            .user-left {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -251,7 +254,8 @@ body {
             }
 
             .schema-right,
-            .table-right {
+            .table-right,
+            .user-right {
                 display: flex;
                 justify-content: end;
                 align-items: baseline;

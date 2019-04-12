@@ -18,13 +18,13 @@ if (isset($_POST["add_username"]) && isset($_POST["add_password"])) {
 }
 
 //Remove User
-elseif (isset($_POST["remove_user"])) {
+elseif (isset($_GET["remove_user"])) {
     $remove = new DatabaseAPI();
-    if ($remove->removeUser($_POST['remove_user'])) {
+    if ($remove->removeUser($_GET['remove_user'])) {
         header('Location: ../pages/requests.php');
         exit;
     } else {
-        header('Location: ../pages/removeUser.php?error=1');
+        header('Location: ../pages/user/manageUsers.php?error=1');
         exit;
     }
 }
@@ -99,74 +99,74 @@ elseif (isset($_POST["update_user"])) {
 
         foreach ($schemas as $schema) {
             foreach ($tables as $table) {
-                if ($table->table_schema == $schema->table_schema) {
+                if ($table->table_schema == $schema->schema_name) {
 
                     //Test SELECT Permission
                     foreach ($_POST as $updatePermisssion => $value) {
-                        if (strpos($updatePermisssion, $schema->table_schema) !== false && strpos($updatePermisssion, $table->table_name) !== false && strpos($updatePermisssion, 'insert') !== false) {
+                        if (strpos($updatePermisssion, $schema->schema_name) !== false && strpos($updatePermisssion, $table->table_name) !== false && strpos($updatePermisssion, 'insert') !== false) {
                             try {
-                                $api->grantPermission('INSERT', $schema->table_schema, $table->table_name, $_POST['update_user']);
+                                $api->grantPermission('INSERT', $schema->schema_name, $table->table_name, $_POST['update_user']);
                                 break;
                             } catch (Exception $e) {
-                                header('Location: ../pages/requests.php?error=1');
+                                header('Location: ../pages/user/manageUsers.php?updateError=1');
                                 exit;
                             }
                         } else {
-                            $api->revokePermission('INSERT', $schema->table_schema, $table->table_name, $_POST['update_user']);
+                            $api->revokePermission('INSERT', $schema->schema_name, $table->table_name, $_POST['update_user']);
                         }
                     }
 
                     //Test INSERT Permission
                     foreach ($_POST as $updatePermisssion => $value) {
-                        if (strpos($updatePermisssion, $schema->table_schema) !== false && strpos($updatePermisssion, $table->table_name) !== false && strpos($updatePermisssion, 'select') !== false) {
+                        if (strpos($updatePermisssion, $schema->schema_name) !== false && strpos($updatePermisssion, $table->table_name) !== false && strpos($updatePermisssion, 'select') !== false) {
                             try {
-                                $api->grantPermission('SELECT', $schema->table_schema, $table->table_name, $_POST['update_user']);
+                                $api->grantPermission('SELECT', $schema->schema_name, $table->table_name, $_POST['update_user']);
                                 break;
                             } catch (Exception $e) {
-                                header('Location: ../pages/requests.php?error=1');
+                                header('Location: ../pages/user/manageUsers.php?updateError=1');
                                 exit;
                             }
                         } else {
-                            $api->revokePermission('SELECT', $schema->table_schema, $table->table_name, $_POST['update_user']);
+                            $api->revokePermission('SELECT', $schema->schema_name, $table->table_name, $_POST['update_user']);
                         }
                     }
 
                     //Test UPDATE Permission
                     foreach ($_POST as $updatePermisssion => $value) {
-                        if (strpos($updatePermisssion, $schema->table_schema) !== false && strpos($updatePermisssion, $table->table_name) !== false && strpos($updatePermisssion, 'update') !== false) {
+                        if (strpos($updatePermisssion, $schema->schema_name) !== false && strpos($updatePermisssion, $table->table_name) !== false && strpos($updatePermisssion, 'update') !== false) {
                             try {
-                                $api->grantPermission('UPDATE', $schema->table_schema, $table->table_name, $_POST['update_user']);
+                                $api->grantPermission('UPDATE', $schema->schema_name, $table->table_name, $_POST['update_user']);
                                 break;
                             } catch (Exception $e) {
-                                header('Location: ../pages/requests.php?error=1');
+                                header('Location: ../pages/user/manageUsers.php?updateError=1');
                                 exit;
                             }
                         } else {
-                            $api->revokePermission('UPDATE', $schema->table_schema, $table->table_name, $_POST['update_user']);
+                            $api->revokePermission('UPDATE', $schema->schema_name, $table->table_name, $_POST['update_user']);
                         }
                     }
 
                     //Test DELETE Permission
                     foreach ($_POST as $updatePermisssion => $value) {
-                        if (strpos($updatePermisssion, $schema->table_schema) !== false && strpos($updatePermisssion, $table->table_name) !== false && strpos($updatePermisssion, 'delete') !== false) {
+                        if (strpos($updatePermisssion, $schema->schema_name) !== false && strpos($updatePermisssion, $table->table_name) !== false && strpos($updatePermisssion, 'delete') !== false) {
                             try {
-                                $api->grantPermission('DELETE', $schema->table_schema, $table->table_name, $_POST['update_user']);
+                                $api->grantPermission('DELETE', $schema->schema_name, $table->table_name, $_POST['update_user']);
                                 break;
                             } catch (Exception $e) {
-                                header('Location: ../pages/requests.php?error=1');
+                                header('Location: ../pages/user/manageUsers.php?updateError=1');
                                 exit;
                             }
                         } else {
-                            $api->revokePermission('DELETE', $schema->table_schema, $table->table_name, $_POST['update_user']);
+                            $api->revokePermission('DELETE', $schema->schema_name, $table->table_name, $_POST['update_user']);
                         }
                     }
                 }
             }
         }
-        header('Location: ../pages/requests.php');
+        header('Location: ../pages/user/manageUsers.php');
         exit;
     } catch (Exception $e) {
-        header('Location: ../pages/requests.php?updateError=1');
+        header('Location: ../pages/user/manageUsers.php?updateError=1');
         exit;
     }
 }

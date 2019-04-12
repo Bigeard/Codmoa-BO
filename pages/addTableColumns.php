@@ -1,5 +1,5 @@
 <?php require "./header.php"; ?> 
-    <a href="./requests.php" class="return" style="position:fixed;">Return</a>
+    <a href="./addTable.php" class="return" style="position:fixed;">Return</a>
     <h1>Add Columns</h1>
 
     <form action="../library/processing.php" method="POST">

@@ -242,7 +242,8 @@ body .return:hover {
   background-color: #2a33b67e;
 }
 
-body .database-wrapper {
+body .database-wrapper,
+body .users-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -259,7 +260,8 @@ body .database-wrapper {
   width: 25%;
 }
 
-body .database-wrapper a.icon {
+body .database-wrapper a.icon,
+body .users-wrapper a.icon {
   cursor: pointer;
   width: auto;
   background-color: transparent;
@@ -279,23 +281,30 @@ body .database-wrapper a.icon {
           box-shadow: none;
 }
 
-body .database-wrapper a.icon:hover {
+body .database-wrapper a.icon:hover,
+body .users-wrapper a.icon:hover {
   background-color: transparent;
   color: none;
 }
 
-body .database-wrapper a.addTable {
+body .database-wrapper a.addTable,
+body .users-wrapper a.addTable {
   border-radius: 30px;
   width: auto;
 }
 
-body .database-wrapper a.addSchema {
+body .database-wrapper a.addSchema,
+body .users-wrapper a.addSchema {
   border-radius: 30px;
   width: 100%;
 }
 
 body .database-wrapper .schema-wrapper,
-body .database-wrapper .table-wrapper {
+body .database-wrapper .table-wrapper,
+body .database-wrapper .user-wrapper,
+body .users-wrapper .schema-wrapper,
+body .users-wrapper .table-wrapper,
+body .users-wrapper .user-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -313,8 +322,22 @@ body .database-wrapper .table-wrapper {
 
 body .database-wrapper .schema-wrapper .schema-left,
 body .database-wrapper .schema-wrapper .table-left,
+body .database-wrapper .schema-wrapper .user-left,
 body .database-wrapper .table-wrapper .schema-left,
-body .database-wrapper .table-wrapper .table-left {
+body .database-wrapper .table-wrapper .table-left,
+body .database-wrapper .table-wrapper .user-left,
+body .database-wrapper .user-wrapper .schema-left,
+body .database-wrapper .user-wrapper .table-left,
+body .database-wrapper .user-wrapper .user-left,
+body .users-wrapper .schema-wrapper .schema-left,
+body .users-wrapper .schema-wrapper .table-left,
+body .users-wrapper .schema-wrapper .user-left,
+body .users-wrapper .table-wrapper .schema-left,
+body .users-wrapper .table-wrapper .table-left,
+body .users-wrapper .table-wrapper .user-left,
+body .users-wrapper .user-wrapper .schema-left,
+body .users-wrapper .user-wrapper .table-left,
+body .users-wrapper .user-wrapper .user-left {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -329,8 +352,22 @@ body .database-wrapper .table-wrapper .table-left {
 
 body .database-wrapper .schema-wrapper .schema-right,
 body .database-wrapper .schema-wrapper .table-right,
+body .database-wrapper .schema-wrapper .user-right,
 body .database-wrapper .table-wrapper .schema-right,
-body .database-wrapper .table-wrapper .table-right {
+body .database-wrapper .table-wrapper .table-right,
+body .database-wrapper .table-wrapper .user-right,
+body .database-wrapper .user-wrapper .schema-right,
+body .database-wrapper .user-wrapper .table-right,
+body .database-wrapper .user-wrapper .user-right,
+body .users-wrapper .schema-wrapper .schema-right,
+body .users-wrapper .schema-wrapper .table-right,
+body .users-wrapper .schema-wrapper .user-right,
+body .users-wrapper .table-wrapper .schema-right,
+body .users-wrapper .table-wrapper .table-right,
+body .users-wrapper .table-wrapper .user-right,
+body .users-wrapper .user-wrapper .schema-right,
+body .users-wrapper .user-wrapper .table-right,
+body .users-wrapper .user-wrapper .user-right {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -344,7 +381,8 @@ body .database-wrapper .table-wrapper .table-right {
   width: 48%;
 }
 
-body .database-wrapper .table-wrapper {
+body .database-wrapper .table-wrapper,
+body .users-wrapper .table-wrapper {
   height: 100px;
   width: 60%;
 }
