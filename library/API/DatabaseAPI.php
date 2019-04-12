@@ -79,6 +79,66 @@ class DatabaseAPI extends ConnectionAPI
             return false;
         }
     }
+
+    //Remove Schema
+    public function removeSchema($schemaName)
+    {
+
+        try {
+            $this->connectDB('postgres', 'P@ssw0rd');
+
+
+            $sql = "DROP SCHEMA $schemaName CASCADE;";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+
+            $this->disconnectDB();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    //Add Table
+    public function createTable($schema, $table)
+    {
+
+        try {
+            $this->connectDB('postgres', 'P@ssw0rd');
+
+
+            $sql = "CREATE SCHEMA $name;";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+
+            $this->disconnectDB();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    //Remove Table
+    public function removeTable($schema, $table)
+    {
+
+        try {
+            $this->connectDB('postgres', 'P@ssw0rd');
+
+
+            $sql = "DROP TABLE $schema.$table CASCADE;";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+
+            $this->disconnectDB();
+
+            return true;
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
     
     //Select all users
     public function selectAllUsers()
@@ -134,13 +194,19 @@ class DatabaseAPI extends ConnectionAPI
         $this->connectDB('postgres', 'P@ssw0rd');
 
         $sql = "SELECT DISTINCT
-                    table_schema
+                    *
                 FROM 
-                    information_schema.tables
+                    information_schema.schemata
                 WHERE 
-                    table_schema != 'pg_catalog'
+                    schema_name != 'pg_catalog'
                 AND 
-                    table_schema != 'information_schema';";
+                    schema_name != 'information_schema'
+                AND 
+                    schema_name != 'pg_temp_1'
+                AND 
+                    schema_name != 'pg_toast'
+                AND 
+                    schema_name != 'pg_toast_temp_1';";
 
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();

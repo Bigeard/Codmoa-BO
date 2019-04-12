@@ -30,9 +30,9 @@ elseif (isset($_POST["remove_user"])) {
 }
 
 //Add Schema
-elseif (isset($_POST["schema_name"])) {
+elseif (isset($_POST["add_schema_name"])) {
     $schema = new DatabaseAPI();
-    if ($schema->createSchema($_POST['schema_name'])) {
+    if ($schema->createSchema($_POST['add_schema_name'])) {
         header('Location: ../pages/requests.php');
         exit;
     } else {
@@ -123,3 +123,49 @@ elseif (isset($_POST["update_user"])) {
         exit;
     }
 }
+
+
+//Remove Table
+elseif ($_GET['remove'] && isset($_GET['schema']) && isset($_GET['table'])) {
+    $remove = new DatabaseAPI();
+    if ($remove->removeTable($_GET['schema'], $_GET['table'])) {
+        header('Location: ../pages/modifyDb.php');
+        exit;
+    } else {
+        header('Location: ../pages/modifyDb.php?error=1');
+    }
+}
+
+//Remove Schema
+elseif ($_GET['remove'] && isset($_GET['schema']) && !isset($_GET['table'])) {
+    $remove = new DatabaseAPI();
+    if ($remove->removeSchema($_GET['schema'])) {
+        header('Location: ../pages/modifyDb.php');
+        exit;
+    } else {
+        header('Location: ../pages/modifyDb.php?error=1');
+    }
+}
+
+//Add Table
+else if ($_GET['add'] && isset($_GET['schema']) && isset($_GET['table'])) {
+    $add = new DatabaseAPI();
+    if ($add->addTable($_GET['schema'], $_GET['table'])) {
+        header('Location: ../pages/modifyDb.php');
+        exit;
+    } else {
+        header('Location: ../pages/modifyDb.php?error=1');
+    }
+}
+
+//Add Schemas
+else if ($_GET['add'] && isset($_GET['schema']) && !isset($_GET['table'])) {
+    $add = new DatabaseAPI();
+    if ($add->addSchema($_GET['schema'])) {
+        header('Location: ../pages/modifyDb.php');
+        exit;
+    } else {
+        header('Location: ../pages/modifyDb.php?error=1');
+    }
+}
+
