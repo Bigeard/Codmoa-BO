@@ -14,7 +14,6 @@ $admin_permissions = $api->checkDatabaseRoles($_SESSION["username"]);
         <?php else : ?>
             <!--Check User permissions -->
             <?php foreach ($admin_permissions as $permission) { ?>
-                <a href="./navigateDb.php">Navigate Database</a>
                 <?php if (strpos($permission->case, 'CREATE DATABASE') !== false) : ?>
                     <a href="./modifyDb.php">Modify Database</a>
                     <a href="./importDb.php">Import Database</a>
